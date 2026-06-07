@@ -166,17 +166,17 @@ if (enquiryForm) {
 
     const data    = new FormData(enquiryForm);
     const name    = (data.get('name')    || '').trim();
-    const phone   = (data.get('phone')   || '').trim();
     const service = data.get('service')  || '';
     const date    = data.get('date')     || '';
     const message = (data.get('message') || '').trim();
 
     // Build the message, skipping empty optional fields.
+    // Phone is intentionally not collected — WhatsApp already
+    // tags the owner's chat with the sender's phone number.
     const lines = [
       `Hi, I'm ${name}.`,
       `I'd like to book: ${service}.`,
       date    ? `Preferred date: ${date}.` : null,
-      phone   ? `My phone: ${phone}.`      : null,
       message ? `\n${message}`             : null,
     ].filter(Boolean);
 
