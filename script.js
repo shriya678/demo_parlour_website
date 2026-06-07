@@ -148,3 +148,39 @@ if (testimonials.length > 0) {
   });
   startTestimonialTimer();
 }
+
+
+// ============================================================
+// Enquiry form → WhatsApp
+// On submit, build a pre-formatted message from the form fields
+// and open wa.me/<owner> with it URL-encoded as the text param.
+// Swap OWNER_WHATSAPP for the real client's number per build.
+// ============================================================
+const OWNER_WHATSAPP = '919999999999';   // country code + number, no '+' or spaces
+
+const enquiryForm = document.getElementById('enquiry-form');
+
+if (enquiryForm) {
+  enquiryForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const data    = new FormData(enquiryForm);
+    const name    = (data.get('name')    || '').trim();
+    const phone   = (data.get('phone')   || '').trim();
+    const service = data.get('service')  || '';
+    const date    = data.get('date')     || '';
+    const message = (data.get('message') || '').trim();
+
+    // Build the message, skipping empty optional fields.
+    const lines = [
+      `Hi, I'm ${name}.`,
+      `I'd like to book: ${service}.`,
+      date    ? `Preferred date: ${date}.` : null,
+      phone   ? `My phone: ${phone}.`      : null,
+      message ? `\n${message}`             : null,
+    ].filter(Boolean);
+
+    const text = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${text}`, '_blank');
+  });
+}
