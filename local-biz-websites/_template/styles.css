@@ -1,0 +1,182 @@
+/* ============================================================
+   Brand variables — change these ONE place to restyle a fork.
+   Demo 1 (parlour): pink/rose.
+   Demo 2 (restaurant) will change to warm orange.
+   Demo 3 (gym) will change to dark with neon accent.
+   ============================================================ */
+:root {
+  --brand-from: #e11d48;   /* main brand colour — deep rose */
+  --brand-to:   #881337;   /* darker shade for gradient */
+}
+
+/* ============================================================
+   Typography
+   Playfair Display = elegant serif for headings.
+   Inter = clean sans-serif for body. Loaded from Google Fonts.
+   ============================================================ */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+h1, h2, h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+/* Smooth animated scroll for any in-page anchor link (e.g. footer
+   "Back to top"). One line replaces an entire JS smooth-scroll library. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================================
+   Hero background — animated gradient that slowly drifts.
+   ============================================================ */
+.brand-bg {
+  background: linear-gradient(
+    135deg,
+    var(--brand-from),
+    var(--brand-to),
+    var(--brand-from)
+  );
+  background-size: 200% 200%;
+  animation: brand-shift 14s ease infinite;
+}
+
+@keyframes brand-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Use this on text that should pick up the brand colour
+   (e.g. big numbers in About / prices in Services). */
+.brand-text {
+  color: var(--brand-from);
+}
+
+/* ============================================================
+   Hero load-in — title, tagline, buttons fade up in sequence
+   when the page first renders.
+   ============================================================ */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-anim-1 { animation: hero-fade-up 0.8s ease-out 0.1s both; }
+.hero-anim-2 { animation: hero-fade-up 0.8s ease-out 0.35s both; }
+.hero-anim-3 { animation: hero-fade-up 0.8s ease-out 0.6s both; }
+
+/* ============================================================
+   Scroll-reveal — elements with .reveal start invisible and
+   slightly offset, then JS adds .in-view when they enter the
+   viewport, animating them into place.
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Floating WhatsApp button — outer expanding ring.
+   Slower and gentler than Tailwind's default `animate-ping`.
+   ============================================================ */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ============================================================
+   Hero floating orbs — three blurred circles that drift up and
+   down at different rates so they never sync visually.
+   ============================================================ */
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-40px); }
+}
+.float-orb-1 { animation: float-orb 9s  ease-in-out infinite; }
+.float-orb-2 { animation: float-orb 12s ease-in-out infinite reverse; }
+.float-orb-3 { animation: float-orb 11s ease-in-out infinite; animation-delay: -3s; }
+
+/* ============================================================
+   Featured Looks marquee — track is double-width and animates
+   from 0 → -50%, which lands exactly on the duplicate, giving
+   a seamless infinite loop. Hover pauses for inspection.
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-img {
+  width: 280px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 1rem;
+  flex-shrink: 0;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   Testimonials carousel — all stacked absolutely, only .active
+   visible. JS toggles .active on rotation.
+   ============================================================ */
+.testimonial {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+}
+.testimonial.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #d1d5db;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.dot:hover {
+  background: #9ca3af;
+}
+.dot.active {
+  background: var(--brand-from);
+  width: 28px;
+}
+
+/* Respect "reduce motion" OS setting — accessibility. */
+@media (prefers-reduced-motion: reduce) {
+  .brand-bg, .hero-anim-1, .hero-anim-2, .hero-anim-3,
+  .pulse-ring, .float-orb-1, .float-orb-2, .float-orb-3,
+  .marquee-track {
+    animation: none;
+  }
+  .reveal, .testimonial {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

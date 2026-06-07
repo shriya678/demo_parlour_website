@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glow Beauty Parlour</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body id="top" class="text-gray-900 antialiased">
+
+  <!-- ============================================================ -->
+  <!--  STICKY NAV                                                   -->
+  <!--  Hidden over the hero, slides down once the hero scrolls out. -->
+  <!-- ============================================================ -->
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-md shadow-sm px-6 py-3 -translate-y-full transition-transform duration-300">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <a href="#top" class="font-bold text-lg brand-text" style="font-family: 'Playfair Display', serif;">Glow Beauty Parlour</a>
+      <a href="tel:+919999999999" class="bg-rose-600 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-rose-700 transition">Call Now</a>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!--  HERO                                                         -->
+  <!--  First screen. Name, tagline, Call + WhatsApp CTAs.           -->
+  <!--  Floating orbs add depth; wave divider closes the section.    -->
+  <!-- ============================================================ -->
+  <section class="brand-bg relative min-h-screen flex items-center justify-center px-6 pb-24 text-center overflow-hidden">
+
+    <!-- Floating decorative orbs (purely visual) -->
+    <div class="absolute top-10 left-10 w-40 h-40 rounded-full bg-white/10 blur-3xl float-orb-1" aria-hidden="true"></div>
+    <div class="absolute bottom-32 right-10 w-56 h-56 rounded-full bg-white/15 blur-3xl float-orb-2" aria-hidden="true"></div>
+    <div class="absolute top-1/3 right-1/4 w-28 h-28 rounded-full bg-white/10 blur-2xl float-orb-3" aria-hidden="true"></div>
+
+    <div class="relative max-w-2xl z-10">
+
+      <h1 class="hero-anim-1 text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight">
+        Glow Beauty Parlour
+      </h1>
+
+      <p class="hero-anim-2 text-lg md:text-xl text-white/90 mb-10">
+        Look your best — bridal makeup, hair styling, skincare.
+      </p>
+
+      <div class="hero-anim-3 flex flex-col sm:flex-row gap-4 justify-center">
+
+        <a
+          href="tel:+919999999999"
+          class="bg-white brand-text font-semibold px-7 py-3 rounded-full shadow hover:shadow-xl hover:-translate-y-0.5 transition"
+        >
+          Call Now
+        </a>
+
+        <a
+          href="https://wa.me/919999999999"
+          class="bg-green-500 text-white font-semibold px-7 py-3 rounded-full shadow hover:shadow-xl hover:-translate-y-0.5 transition"
+        >
+          WhatsApp Us
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Wave divider — fills below the hero with the About section's bg colour -->
+    <svg class="absolute bottom-0 left-0 right-0 w-full h-12 md:h-20" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,80 C480,0 960,0 1440,80 L1440,80 L0,80 Z" fill="#fafaf9"/>
+    </svg>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  ABOUT / WHY US                                               -->
+  <!--  Short pitch + 3 trust stats. Light background to break       -->
+  <!--  the visual rhythm after the brand-coloured hero.             -->
+  <!-- ============================================================ -->
+  <section class="bg-stone-50 py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="reveal text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Why Glow?</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+          For over a decade, Glow has helped customers look and feel their best —
+          quick haircuts, deep skincare, bridal makeovers, and everything in between.
+          Walk in stressed, walk out glowing.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+        <div class="reveal bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition">
+          <div class="text-4xl font-bold brand-text" data-count="10" data-display="10+">0</div>
+          <div class="text-gray-600 mt-2">Years Serving</div>
+        </div>
+
+        <div class="reveal bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition" style="transition-delay: 0.1s">
+          <div class="text-4xl font-bold brand-text" data-count="5000" data-display="5,000+">0</div>
+          <div class="text-gray-600 mt-2">Happy Clients</div>
+        </div>
+
+        <div class="reveal bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition" style="transition-delay: 0.2s">
+          <div class="text-4xl font-bold brand-text">Bridal</div>
+          <div class="text-gray-600 mt-2">Specialists</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  FEATURED LOOKS — horizontal marquee                          -->
+  <!--  Two duplicated tracks scroll together for a seamless loop.   -->
+  <!--  Hover pauses; mask gradient fades the edges.                 -->
+  <!-- ============================================================ -->
+  <section class="bg-stone-50 py-20 overflow-hidden">
+    <div class="reveal text-center mb-12 px-6">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4">Featured Looks</h2>
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        A live reel of recent makeovers. Hover to pause.
+      </p>
+    </div>
+
+    <div class="marquee">
+      <div class="marquee-track">
+        <!-- First copy -->
+        <img src="https://picsum.photos/seed/look1/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look2/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look3/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look4/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look5/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look6/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look7/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look8/400/500" alt="Featured look" loading="lazy" class="marquee-img" />
+        <!-- Second copy (identical) — gives the seamless loop -->
+        <img src="https://picsum.photos/seed/look1/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look2/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look3/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look4/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look5/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look6/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look7/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+        <img src="https://picsum.photos/seed/look8/400/500" alt="" aria-hidden="true" loading="lazy" class="marquee-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  SERVICES & PRICES                                            -->
+  <!--  Card grid, name + price + one-line description.              -->
+  <!--  Keep to ~6 items — long menus paralyse decisions.            -->
+  <!-- ============================================================ -->
+  <section class="bg-white py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="reveal text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Our Services</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+          Honest prices, no surprises. Walk-ins welcome —
+          appointments recommended for bridal and treatments.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div class="reveal border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition">
+          <div class="flex items-start justify-between mb-3 gap-3">
+            <h3 class="text-xl font-bold">Haircut &amp; Styling</h3>
+            <span class="brand-text font-bold whitespace-nowrap">&#8377;400</span>
+          </div>
+          <p class="text-gray-600">Trim, layers, blow-dry — for any hair length.</p>
+        </div>
+
+        <div class="reveal border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition" style="transition-delay: 0.1s">
+          <div class="flex items-start justify-between mb-3 gap-3">
+            <h3 class="text-xl font-bold">Hair Colour</h3>
+            <span class="brand-text font-bold whitespace-nowrap">From &#8377;1,500</span>
+          </div>
+          <p class="text-gray-600">Root touch-up, full colour, highlights, balayage.</p>
+        </div>
+
+        <div class="reveal border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition" style="transition-delay: 0.2s">
+          <div class="flex items-start justify-between mb-3 gap-3">
+            <h3 class="text-xl font-bold">Facial</h3>
+            <span class="brand-text font-bold whitespace-nowrap">&#8377;800</span>
+          </div>
+          <p class="text-gray-600">Deep cleanse and glow boost for tired skin.</p>
+        </div>
+
+        <div class="reveal border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition" style="transition-delay: 0.3s">
+          <div class="flex items-start justify-between mb-3 gap-3">
+            <h3 class="text-xl font-bold">Threading</h3>
+            <span class="brand-text font-bold whitespace-nowrap">From &#8377;100</span>
+          </div>
+          <p class="text-gray-600">Eyebrows, upper lip, or full face.</p>
+        </div>
+
+        <div class="reveal border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition" style="transition-delay: 0.4s">
+          <div class="flex items-start justify-between mb-3 gap-3">
+            <h3 class="text-xl font-bold">Bridal Package</h3>
+            <span class="brand-text font-bold whitespace-nowrap">From &#8377;15,000</span>
+          </div>
+          <p class="text-gray-600">Hair, makeup, saree drape — ready for the aisle.</p>
+        </div>
+
+        <div class="reveal border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition" style="transition-delay: 0.5s">
+          <div class="flex items-start justify-between mb-3 gap-3">
+            <h3 class="text-xl font-bold">Skin Treatment</h3>
+            <span class="brand-text font-bold whitespace-nowrap">From &#8377;1,200</span>
+          </div>
+          <p class="text-gray-600">Anti-tan, hydration, peels — by trained estheticians.</p>
+        </div>
+
+      </div>
+
+      <p class="text-center text-gray-500 mt-10 text-sm">
+        Prices may vary based on hair length or skin condition. Final quote shared at the chair.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  GALLERY                                                      -->
+  <!--  6-tile grid, click any tile to open lightbox.                -->
+  <!--  Photos are picsum placeholders — swap with real client       -->
+  <!--  photos before publishing.                                    -->
+  <!-- ============================================================ -->
+  <section class="bg-stone-50 py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="reveal text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Our Work</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+          A peek at recent styling, makeup and bridal looks from Glow.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+
+        <button class="reveal gallery-thumb relative overflow-hidden rounded-xl aspect-square group" data-full="https://picsum.photos/seed/glow1/1200/1200">
+          <img src="https://picsum.photos/seed/glow1/600/600" alt="Recent salon work 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        </button>
+
+        <button class="reveal gallery-thumb relative overflow-hidden rounded-xl aspect-square group" data-full="https://picsum.photos/seed/glow2/1200/1200" style="transition-delay: 0.1s">
+          <img src="https://picsum.photos/seed/glow2/600/600" alt="Recent salon work 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        </button>
+
+        <button class="reveal gallery-thumb relative overflow-hidden rounded-xl aspect-square group" data-full="https://picsum.photos/seed/glow3/1200/1200" style="transition-delay: 0.2s">
+          <img src="https://picsum.photos/seed/glow3/600/600" alt="Recent salon work 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        </button>
+
+        <button class="reveal gallery-thumb relative overflow-hidden rounded-xl aspect-square group" data-full="https://picsum.photos/seed/glow4/1200/1200" style="transition-delay: 0.3s">
+          <img src="https://picsum.photos/seed/glow4/600/600" alt="Recent salon work 4" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        </button>
+
+        <button class="reveal gallery-thumb relative overflow-hidden rounded-xl aspect-square group" data-full="https://picsum.photos/seed/glow5/1200/1200" style="transition-delay: 0.4s">
+          <img src="https://picsum.photos/seed/glow5/600/600" alt="Recent salon work 5" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        </button>
+
+        <button class="reveal gallery-thumb relative overflow-hidden rounded-xl aspect-square group" data-full="https://picsum.photos/seed/glow6/1200/1200" style="transition-delay: 0.5s">
+          <img src="https://picsum.photos/seed/glow6/600/600" alt="Recent salon work 6" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  LIGHTBOX OVERLAY                                             -->
+  <!--  Hidden by default. JS toggles 'hidden' / 'flex' on click.    -->
+  <!-- ============================================================ -->
+  <div id="lightbox" class="fixed inset-0 bg-black/85 z-50 hidden items-center justify-center p-4 cursor-zoom-out">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full rounded-lg" />
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl leading-none w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center" aria-label="Close">&times;</button>
+  </div>
+
+  <!-- ============================================================ -->
+  <!--  TESTIMONIALS — auto-rotating quote with dot indicators       -->
+  <!--  All quotes are absolute-stacked; only .active is visible.    -->
+  <!-- ============================================================ -->
+  <section class="bg-white py-20 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+
+      <div class="reveal mb-10">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Loved by Many</h2>
+        <p class="text-lg text-gray-700">
+          From quick walk-ins to once-in-a-lifetime brides.
+        </p>
+      </div>
+
+      <div class="reveal relative h-56 md:h-44">
+
+        <div class="testimonial active absolute inset-0 flex flex-col justify-center px-4">
+          <svg class="brand-text mx-auto mb-4" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/>
+          </svg>
+          <p class="text-xl md:text-2xl text-gray-800 italic leading-relaxed mb-4">
+            Best bridal makeup in town. The team listened to exactly what I wanted and I felt like a queen the whole day.
+          </p>
+          <p class="font-semibold text-gray-600">— Priya, Connaught Place</p>
+        </div>
+
+        <div class="testimonial absolute inset-0 flex flex-col justify-center px-4">
+          <svg class="brand-text mx-auto mb-4" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/>
+          </svg>
+          <p class="text-xl md:text-2xl text-gray-800 italic leading-relaxed mb-4">
+            I've been getting my hair done here for three years. They remember exactly how I like it. That's rare.
+          </p>
+          <p class="font-semibold text-gray-600">— Anjali, Karol Bagh</p>
+        </div>
+
+        <div class="testimonial absolute inset-0 flex flex-col justify-center px-4">
+          <svg class="brand-text mx-auto mb-4" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/>
+          </svg>
+          <p class="text-xl md:text-2xl text-gray-800 italic leading-relaxed mb-4">
+            Walked in for a quick threading, walked out booked for a facial too. Genuinely friendly, genuinely good.
+          </p>
+          <p class="font-semibold text-gray-600">— Meera, Lajpat Nagar</p>
+        </div>
+
+      </div>
+
+      <div class="flex justify-center gap-3 mt-8" id="testimonial-dots">
+        <button class="dot active" data-index="0" aria-label="Show testimonial 1"></button>
+        <button class="dot" data-index="1" aria-label="Show testimonial 2"></button>
+        <button class="dot" data-index="2" aria-label="Show testimonial 3"></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  HOURS & LOCATION                                             -->
+  <!--  Two-column on desktop, stacked on mobile.                    -->
+  <!--  Map uses the simple `?q=...&output=embed` URL — swap the     -->
+  <!--  query string per client.                                     -->
+  <!-- ============================================================ -->
+  <section class="bg-white py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="reveal text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Visit Us</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+          Open seven days a week. Walk in or call ahead — we'll find you a slot.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+        <!-- Hours table -->
+        <div class="reveal">
+          <h3 class="text-2xl font-semibold mb-4">Hours</h3>
+          <table class="w-full">
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="py-3 font-medium">Monday</td>
+                <td class="py-3 text-gray-600 text-right">10:00 AM – 8:00 PM</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-medium">Tuesday</td>
+                <td class="py-3 text-gray-600 text-right">10:00 AM – 8:00 PM</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-medium">Wednesday</td>
+                <td class="py-3 text-gray-600 text-right">10:00 AM – 8:00 PM</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-medium">Thursday</td>
+                <td class="py-3 text-gray-600 text-right">10:00 AM – 8:00 PM</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-medium">Friday</td>
+                <td class="py-3 text-gray-600 text-right">10:00 AM – 9:00 PM</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-medium">Saturday</td>
+                <td class="py-3 text-gray-600 text-right">9:00 AM – 9:00 PM</td>
+              </tr>
+              <tr>
+                <td class="py-3 font-medium">Sunday</td>
+                <td class="py-3 text-gray-600 text-right">10:00 AM – 6:00 PM</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="mt-8 p-5 rounded-xl bg-stone-50">
+            <p class="text-sm text-gray-500 mb-1">Address</p>
+            <p class="font-medium">12 Connaught Place, New Delhi, 110001</p>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="reveal rounded-2xl overflow-hidden shadow-sm" style="transition-delay: 0.15s">
+          <iframe
+            src="https://maps.google.com/maps?q=Connaught+Place+New+Delhi&output=embed&z=15"
+            class="w-full h-[400px] lg:h-[560px] border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Map of Glow Beauty Parlour">
+          </iframe>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  CONTACT                                                      -->
+  <!--  4 clickable channel cards — phone, whatsapp, IG, email.      -->
+  <!--  SVG icons inherit brand colour via `currentColor`.           -->
+  <!-- ============================================================ -->
+  <section class="bg-stone-50 py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="reveal text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Get In Touch</h2>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+          Pick whatever's easiest. We usually reply within 30 minutes during open hours.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <a href="tel:+919999999999" class="reveal bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md hover:-translate-y-1 transition">
+          <div class="brand-text mb-3 flex justify-center">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold mb-1">Call</h3>
+          <p class="text-gray-600 text-sm">+91 99999 99999</p>
+        </a>
+
+        <a href="https://wa.me/919999999999" class="reveal bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md hover:-translate-y-1 transition" style="transition-delay: 0.1s">
+          <div class="brand-text mb-3 flex justify-center">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold mb-1">WhatsApp</h3>
+          <p class="text-gray-600 text-sm">+91 99999 99999</p>
+        </a>
+
+        <a href="https://instagram.com/glowparlour" target="_blank" rel="noopener" class="reveal bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md hover:-translate-y-1 transition" style="transition-delay: 0.2s">
+          <div class="brand-text mb-3 flex justify-center">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </div>
+          <h3 class="font-bold mb-1">Instagram</h3>
+          <p class="text-gray-600 text-sm">@glowparlour</p>
+        </a>
+
+        <a href="mailto:hello@glowparlour.com" class="reveal bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-md hover:-translate-y-1 transition" style="transition-delay: 0.3s">
+          <div class="brand-text mb-3 flex justify-center">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h3 class="font-bold mb-1">Email</h3>
+          <p class="text-gray-600 text-sm break-all">hello@glowparlour.com</p>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!--  FOOTER                                                       -->
+  <!--  Dark close-out: identity, back-to-top, copyright, credit.    -->
+  <!-- ============================================================ -->
+  <footer class="bg-gray-900 text-gray-300 px-6 py-12">
+    <div class="max-w-6xl mx-auto">
+
+      <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-white mb-2">Glow Beauty Parlour</h2>
+        <p class="text-gray-400">Look your best — every day.</p>
+      </div>
+
+      <div class="flex justify-center mb-8">
+        <a href="#top" class="text-sm hover:text-white transition">↑ Back to top</a>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-800 text-sm text-gray-500 gap-2">
+        <p>&copy; 2026 Glow Beauty Parlour. All rights reserved.</p>
+
+        <!-- Builder credit: optional — remove for clients who don't want it -->
+        <p>Built by <a href="#" class="text-gray-400 hover:text-white transition">Shriya Gupta</a></p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!--  FLOATING WHATSAPP BUTTON                                     -->
+  <!--  Always visible bottom-right. Slow pulse ring draws the eye.  -->
+  <!-- ============================================================ -->
+  <a href="https://wa.me/919999999999"
+     class="fixed bottom-6 right-6 z-40 group"
+     aria-label="Chat on WhatsApp">
+    <span class="absolute inset-0 rounded-full bg-green-500 pulse-ring"></span>
+    <span class="relative flex w-14 h-14 rounded-full bg-green-500 text-white items-center justify-center shadow-lg group-hover:bg-green-600 transition">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/>
+      </svg>
+    </span>
+  </a>
+
+</body>
+</html>
