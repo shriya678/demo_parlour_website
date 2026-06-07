@@ -156,7 +156,7 @@ if (testimonials.length > 0) {
 // and open wa.me/<owner> with it URL-encoded as the text param.
 // Swap OWNER_WHATSAPP for the real client's number per build.
 // ============================================================
-const OWNER_WHATSAPP = '919999999999';   // country code + number, no '+' or spaces
+const OWNER_WHATSAPP = '918319181409';   // country code + number, no '+' or spaces
 
 const enquiryForm = document.getElementById('enquiry-form');
 
