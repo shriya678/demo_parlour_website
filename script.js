@@ -151,12 +151,18 @@ if (testimonials.length > 0) {
 
 
 // ============================================================
-// Enquiry form → WhatsApp
-// On submit, build a pre-formatted message from the form fields
-// and open wa.me/<owner> with it URL-encoded as the text param.
-// Swap OWNER_WHATSAPP for the real client's number per build.
+// Enquiry form → WhatsApp + Google Sheet (dual destination)
+// On submit:
+//   1. POST form data to SHEET_ENDPOINT (Google Apps Script) so
+//      the owner has a searchable log of every enquiry.
+//   2. Open wa.me/<owner> with a pre-filled message for an
+//      instant chat — that's where bookings actually close.
+// The Sheet POST is fire-and-forget; it never blocks the
+// WhatsApp redirect even if the network is slow.
+// Both endpoints are swap points per client.
 // ============================================================
 const OWNER_WHATSAPP = '918319181409';   // country code + number, no '+' or spaces
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWkWfbTYXCS1dqpctIeSbz-kDOw316BEMEyqvpC9NgesjLJmC5LCwYpjAjbzc3bBmnLw/exec';
 
 const enquiryForm = document.getElementById('enquiry-form');
 
@@ -170,7 +176,19 @@ if (enquiryForm) {
     const date    = data.get('date')     || '';
     const message = (data.get('message') || '').trim();
 
-    // Build the message, skipping empty optional fields.
+    // 1. Fire-and-forget POST to the Google Sheet.
+    // text/plain + no-cors avoids the preflight that Apps Script
+    // doesn't answer cleanly. We don't read the response.
+    if (SHEET_ENDPOINT) {
+      fetch(SHEET_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ name, service, date, message })
+      }).catch(err => console.error('Sheet log failed:', err));
+    }
+
+    // 2. Build and open the WhatsApp pre-fill.
     // Phone is intentionally not collected — WhatsApp already
     // tags the owner's chat with the sender's phone number.
     const lines = [
