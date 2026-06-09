@@ -172,6 +172,7 @@ if (enquiryForm) {
 
     const data    = new FormData(enquiryForm);
     const name    = (data.get('name')    || '').trim();
+    const phone   = (data.get('phone')   || '').trim();
     const service = data.get('service')  || '';
     const date    = data.get('date')     || '';
     const message = (data.get('message') || '').trim();
@@ -184,12 +185,12 @@ if (enquiryForm) {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ name, service, date, message })
+        body: JSON.stringify({ name, phone, service, date, message })
       }).catch(err => console.error('Sheet log failed:', err));
     }
 
     // 2. Build and open the WhatsApp pre-fill.
-    // Phone is intentionally not collected — WhatsApp already
+    // Phone isn't repeated in the message — WhatsApp already
     // tags the owner's chat with the sender's phone number.
     const lines = [
       `Hi, I'm ${name}.`,
