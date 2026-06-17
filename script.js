@@ -151,55 +151,54 @@ if (testimonials.length > 0) {
 
 
 // ============================================================
-// Enquiry form → WhatsApp + Google Sheet (dual destination)
+// Enquiry form → Google Sheet (which also notifies the owner
+// on WhatsApp via CallMeBot — that logic lives in Apps Script).
 // On submit:
-//   1. POST form data to SHEET_ENDPOINT (Google Apps Script) so
-//      the owner has a searchable log of every enquiry.
-//   2. Open wa.me/<owner> with a pre-filled message for an
-//      instant chat — that's where bookings actually close.
-// The Sheet POST is fire-and-forget; it never blocks the
-// WhatsApp redirect even if the network is slow.
-// Both endpoints are swap points per client.
+//   1. POST form data to SHEET_ENDPOINT.
+//   2. Hide the form, show the success state on the page.
+// No more WhatsApp redirect — owner gets pinged server-side.
 // ============================================================
-const OWNER_WHATSAPP = '918319181409';   // country code + number, no '+' or spaces
 const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWkWfbTYXCS1dqpctIeSbz-kDOw316BEMEyqvpC9NgesjLJmC5LCwYpjAjbzc3bBmnLw/exec';
 
-const enquiryForm = document.getElementById('enquiry-form');
+const enquiryForm    = document.getElementById('enquiry-form');
+const enquirySuccess = document.getElementById('enquiry-success');
+const enquiryReset   = document.getElementById('enquiry-reset');
 
 if (enquiryForm) {
   enquiryForm.addEventListener('submit', e => {
     e.preventDefault();
 
     const data    = new FormData(enquiryForm);
-    const name    = (data.get('name')    || '').trim();
-    const phone   = (data.get('phone')   || '').trim();
-    const service = data.get('service')  || '';
-    const date    = data.get('date')     || '';
-    const message = (data.get('message') || '').trim();
+    const payload = {
+      name:    (data.get('name')    || '').trim(),
+      phone:   (data.get('phone')   || '').trim(),
+      service:  data.get('service') || '',
+      date:     data.get('date')    || '',
+      message: (data.get('message') || '').trim(),
+    };
 
-    // 1. Fire-and-forget POST to the Google Sheet.
-    // text/plain + no-cors avoids the preflight that Apps Script
-    // doesn't answer cleanly. We don't read the response.
+    // Fire-and-forget POST. text/plain + no-cors avoids the CORS
+    // preflight that Apps Script doesn't answer cleanly.
     if (SHEET_ENDPOINT) {
       fetch(SHEET_ENDPOINT, {
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ name, phone, service, date, message })
+        body: JSON.stringify(payload)
       }).catch(err => console.error('Sheet log failed:', err));
     }
 
-    // 2. Build and open the WhatsApp pre-fill.
-    // Phone isn't repeated in the message — WhatsApp already
-    // tags the owner's chat with the sender's phone number.
-    const lines = [
-      `Hi, I'm ${name}.`,
-      `I'd like to book: ${service}.`,
-      date    ? `Preferred date: ${date}.` : null,
-      message ? `\n${message}`             : null,
-    ].filter(Boolean);
-
-    const text = encodeURIComponent(lines.join('\n'));
-    window.open(`https://wa.me/${OWNER_WHATSAPP}?text=${text}`, '_blank');
+    // Swap UI: hide form, show success card.
+    enquiryForm.classList.add('hidden');
+    enquirySuccess.classList.remove('hidden');
+    enquiryForm.reset();
   });
+
+  // "Send another enquiry" link inside the success card.
+  if (enquiryReset) {
+    enquiryReset.addEventListener('click', () => {
+      enquirySuccess.classList.add('hidden');
+      enquiryForm.classList.remove('hidden');
+    });
+  }
 }
