@@ -151,24 +151,24 @@ if (testimonials.length > 0) {
 
 
 // ============================================================
-// Enquiry form → Google Sheet (which also notifies the owner
-// on WhatsApp via CallMeBot — that logic lives in Apps Script).
+// Booking form → Google Sheet (which also emails the owner —
+// that logic lives in the Apps Script doPost).
 // On submit:
 //   1. POST form data to SHEET_ENDPOINT.
 //   2. Hide the form, show the success state on the page.
-// No more WhatsApp redirect — owner gets pinged server-side.
+// Owner gets the booking request via email within seconds.
 // ============================================================
 const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwWkWfbTYXCS1dqpctIeSbz-kDOw316BEMEyqvpC9NgesjLJmC5LCwYpjAjbzc3bBmnLw/exec';
 
-const enquiryForm    = document.getElementById('enquiry-form');
-const enquirySuccess = document.getElementById('enquiry-success');
-const enquiryReset   = document.getElementById('enquiry-reset');
+const bookingForm    = document.getElementById('booking-form');
+const bookingSuccess = document.getElementById('booking-success');
+const bookingReset   = document.getElementById('booking-reset');
 
-if (enquiryForm) {
-  enquiryForm.addEventListener('submit', e => {
+if (bookingForm) {
+  bookingForm.addEventListener('submit', e => {
     e.preventDefault();
 
-    const data    = new FormData(enquiryForm);
+    const data    = new FormData(bookingForm);
     const payload = {
       name:    (data.get('name')    || '').trim(),
       phone:   (data.get('phone')   || '').trim(),
@@ -189,16 +189,16 @@ if (enquiryForm) {
     }
 
     // Swap UI: hide form, show success card.
-    enquiryForm.classList.add('hidden');
-    enquirySuccess.classList.remove('hidden');
-    enquiryForm.reset();
+    bookingForm.classList.add('hidden');
+    bookingSuccess.classList.remove('hidden');
+    bookingForm.reset();
   });
 
-  // "Send another enquiry" link inside the success card.
-  if (enquiryReset) {
-    enquiryReset.addEventListener('click', () => {
-      enquirySuccess.classList.add('hidden');
-      enquiryForm.classList.remove('hidden');
+  // "Make another booking" link inside the success card.
+  if (bookingReset) {
+    bookingReset.addEventListener('click', () => {
+      bookingSuccess.classList.add('hidden');
+      bookingForm.classList.remove('hidden');
     });
   }
 }
